@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3</title>
+</head>
+<body>
+    <p>Loading...</p>
+    <script>
+        function area(x1, y1, x2, y2, x3, y3)
+{
+return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+}
+
+
+function check(x1, y1, x2, y2, x3,y3, x4, y4, x, y)
+{
+/* Calculate area of rectangle ABCD */
+let A = area(x1, y1, x2, y2, x3, y3) +
+    area(x1, y1, x4, y4, x3, y3);
+
+/* Calculate area of triangle PAB */
+let A1 = area(x, y, x1, y1, x2, y2);
+
+/* Calculate area of triangle PBC */
+let A2 = area(x, y, x2, y2, x3, y3);
+
+/* Calculate area of triangle PCD */
+let A3 = area(x, y, x3, y3, x4, y4);
+
+/* Calculate area of triangle PAD */
+let A4 = area(x, y, x1, y1, x4, y4);
+
+/* Check if sum of A1, A2, A3 and A4
+is same as A */
+let values = [A1,A2,A3,A4];
+let maxim = Math.min(...values);
+return {torf: (A == A1 + A2 + A3 + A4), indexValue : values.indexOf(maxim)};
+}
+
+
+function generateRandom(maxLimit){
+    let rand = Math. random() * maxLimit;  
+
+    rand = Math. floor(rand); 
+    return rand;
+    }
+
+
+
+let x ,y,z;
+let a1 = 0,a2 = 1,a3 = 2,a4=3;
+let s1= 0 ,s2 = 0 ,s3 = 0 ,s4 = 0;
+let arr1 = [];
+
+let n = parseInt(prompt('How mamy random points you need? (Must be the multiples of 4)')); // your number
+
+for (i=0;i<n;i++){
+    z= true;
+    while(z==true){
+x=generateRandom(100);
+y=generateRandom(100);
+
+let theValues = check(1,1, 5, 1, 1, 5, 5, 5, x, y);
+if (theValues.torf)
+{
+
+    if (a1 === theValues.indexValue ){
+        s1 = s1+1;
+    }
+    
+    else if (a2 === theValues.indexValue ){
+        s2 = s2+1;
+    }
+    else if (a3 === theValues.indexValue ){
+        s3 = s3+1;
+    }
+    else if(a4 === theValues.indexValue){
+        s4=s4+1;
+    }
+    
+    arr1.push(`[${x},${y}]`);    
+
+
+
+z=false;
+}
+
+}
+ 
+}
+s1 = Math.round(s1/n *100), s2 = Math.round(s2/n *100), s3 = Math.round(s3/n *100), s4 = Math.round(s4/n *100);
+document.write(`The co-ordinates of the random points are ${arr1}`);
+
+document.writeln(`\nThe Percentage of s1 = ${s1}%`);
+document.writeln(`\nThe Percentage of s2 = ${s2}%`);
+document.writeln(`\nThe Percentage of s3 = ${s3}%`);
+document.writeln(`\nThe Percentage of s4 = ${s4}%`);
+
+    </script>
+</body>
+</html>
