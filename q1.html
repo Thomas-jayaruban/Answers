@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1</title>
+</head>
+<body>
+    <script>
+     function longestSubString(input) {
+    
+    const getMaxString = (a, b) => {
+       return a.length > b.length ? a : b;
+    }
+    var result = "", i, char, maxSubString = "";
+    for (i = 0; i < input.length; i += 1) {
+        char = input.charAt(i);
+        result = result.length > 0 && result.charAt(result.length-1) === char ? char : result+char;
+        maxSubString = getMaxString(result,maxSubString );
+    }
+    return maxSubString;
+}
+  
+
+let word = prompt("Type a word: ");
+
+document.write(longestSubString(word));
+
+
+    </script>
+
+</body>
+</html>
